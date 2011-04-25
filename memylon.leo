@@ -10,10 +10,8 @@
 <find_panel_settings/>
 <vnodes>
 <v t="silver.20110424221130.5816" a="E"><vh>Code</vh>
-<v t="silver.20110424132433.1265"
-expanded="silver.20110424132433.1270,silver.20110424132433.1267,silver.20110424132433.1275,silver.20110424132433.14447,silver.20110424132433.1280,"><vh>@shadow memylon.js</vh></v>
-<v t="silver.20110425143056.1321" a="E"
-expanded="silver.20110425143056.1326,"><vh>@shadow memylon.html</vh></v>
+<v t="silver.20110424132433.1265"><vh>@auto memylon.js</vh></v>
+<v t="silver.20110425143056.1321" a="E"><vh>@auto memylon.html</vh></v>
 </v>
 </vnodes>
 <tnodes>
