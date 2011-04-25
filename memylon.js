@@ -227,62 +227,67 @@ var Memylon = function() {
             }]),
             anim(['wait', 6500], ['text', 5000, {
                 text: CARD_NAMES[Math.abs(cardID) - 1], 
-                color: '#D91122', 
+                color: '#D91122',  
                 xFrom: -100, xTo: xCenter, yFrom: 210, 
                 sizeFrom: 0, sizeTo: 55
             }])];
     }
-    
+
+    function clickCard(cardIdx) {
+	var card = cards[cardIdx];
+	if (prevIdx === -1) {
+            //  no cards are flipped yet
+            prevIdx = cardIdx;
+            card.anim = anim(['flip', FLIP_TIME, card.id]);
+            card.id = -card.id;
+        } else {
+            var prevCard = cards[prevIdx];
+            if (Math.abs(card.id) === Math.abs(prevCard.id)) {
+                //  the match is found
+                
+                //  animation for the already flipped card: wait and dissolve
+                prevCard.anim = 
+                    anim(['pose', FLIP_TIME, prevCard.id],
+                         ['hide', HIDE_TIME, prevCard.id]);
+                //  animation for the current card: flip and dissolve
+                card.anim = 
+                    anim(['flip', FLIP_TIME, card.id],
+                         ['hide', HIDE_TIME, -card.id]);
+                //  animation of the flying card caption
+                anims = [anim(['text', 2000, {
+                    text: CARD_NAMES[Math.abs(card.id) - 1], 
+                    alphaFrom: 1, alphaTo: 0.01, 
+                    sizeFrom: 10, sizeTo: 300}], ['wait'])];
+                var cardID = card.id;
+                prevCard.id = card.id = 0;
+                if (Utils.every(cards, function (card) { return (card.id === 0); })) {
+                    //  all matches are found, show the final scene animation
+                    playFinalScene(cardID);
+                } 
+            } else {
+                //  animation for the already flipped card: wait and flip back 
+                prevCard.anim = 
+                    anim(['pose', FLIP_TIME + SHOW_TIME, prevCard.id],
+                         ['flip', FLIP_TIME,  prevCard.id],
+                         ['pose', 0, -prevCard.id]);                    
+                //  animation for the current card: flip, wait, flip back 
+                card.anim = 
+                    anim(['flip', FLIP_TIME,  card.id],
+                         ['pose', SHOW_TIME, -card.id],
+                         ['flip', FLIP_TIME, -card.id],
+                         ['pose',         0,  card.id]);
+                prevCard.id = -prevCard.id;
+                setNumMisses(numMisses + 1); 
+            }
+            prevIdx = -1;
+        }
+    }
+
     function onMouseClick(x, y) {
         var cardIdx = Math.floor(x/CARD_W) + numCardsW*Math.floor(y/CARD_H);
         var card = cards[cardIdx];
         if (canInteract && card && (cardIdx !== prevIdx) && (card.id !== 0)) {
-            if (prevIdx === -1) {
-                //  no cards are flipped yet
-                prevIdx = cardIdx;
-                card.anim = anim(['flip', FLIP_TIME, card.id]);
-                card.id = -card.id;
-            } else {
-                var prevCard = cards[prevIdx];
-                if (Math.abs(card.id) === Math.abs(prevCard.id)) {
-                    //  the match is found
-                    
-                    //  animation for the already flipped card: wait and dissolve
-                    prevCard.anim = 
-                        anim(['pose', FLIP_TIME, prevCard.id],
-                             ['hide', HIDE_TIME, prevCard.id]);
-                    //  animation for the current card: flip and dissolve
-                    card.anim = 
-                        anim(['flip', FLIP_TIME, card.id],
-                             ['hide', HIDE_TIME, -card.id]);
-                    //  animation of the flying card caption
-                    anims = [anim(['text', 2000, {
-                        text: CARD_NAMES[Math.abs(card.id) - 1], 
-                        alphaFrom: 1, alphaTo: 0.01, 
-                        sizeFrom: 10, sizeTo: 300}], ['wait'])];
-                    var cardID = card.id;
-                    prevCard.id = card.id = 0;
-                    if (Utils.every(cards, function (card) { return (card.id === 0); })) {
-                        //  all matches are found, show the final scene animation
-                        playFinalScene(cardID);
-                    } 
-                } else {
-                    //  animation for the already flipped card: wait and flip back 
-                    prevCard.anim = 
-                        anim(['pose', FLIP_TIME + SHOW_TIME, prevCard.id],
-                             ['flip', FLIP_TIME,  prevCard.id],
-                             ['pose', undefined, -prevCard.id]);                    
-                    //  animation for the current card: flip, wait, flip back 
-                    card.anim = 
-                        anim(['flip', FLIP_TIME,  card.id],
-                             ['pose', SHOW_TIME, -card.id],
-                             ['flip', FLIP_TIME, -card.id],
-                             ['pose', undefined,  card.id]);
-                    prevCard.id = -prevCard.id;
-                    setNumMisses(numMisses + 1); 
-                }
-                prevIdx = -1;
-            }
+            clickCard(cardIdx);
         }
     }
     
