@@ -1,63 +1,6 @@
-
-var Utils = {
-    //  Randomly shuffles the array using Fisher-Yates algorithm
-    shuffleArray : function (arr) {
-        for (var i in arr) {
-            var k = Math.floor(Math.random()*i);
-            var val = arr[k];
-            arr[k] = arr[i];
-            arr[i] = val;
-        }
-    },
-    //  Returns true if all elements of the array satisfy the given predicate
-    every : function (arr, predicate) {
-        for (var i in arr) {
-            if (!predicate(arr[i])) return false;
-        }
-        return true;
-    },
-    //  Linear interpolation between a and b with factor t
-    lerp : function (a, b, t) {
-        return a + t*(b - a);
-    },
-    //  Append parameters in "params" with default values from "defaults"
-    setDefaults : function (params, defaults) {
-        for (var i in defaults) {
-            if (params[i] == undefined) {
-                params[i] = defaults[i];
-            }
-        }
-    },
-    $ : function (id) {
-        return document.getElementById(id);
-    }
+window.onload = function () {
+    Memylon.init();
 }
-
-
-// a simple class representing a list of animations played in sequence
-AnimSequence = function () {
-    this.anims = [];
-    this.curAnim = 0;
-    this.curTime = 0;
-};
-AnimSequence.prototype.add = function (updateFn, duration, startParam) {
-    this.anims.push({updateFn: updateFn, duration: duration, startParam: startParam});
-};
-AnimSequence.prototype.update = function (dt, updateParam) {
-    var anim = this.anims[this.curAnim];
-    this.curTime += dt;
-    if (anim.duration && this.curTime >= anim.duration) {
-        anim.updateFn(1, anim.startParam, updateParam);
-        if (this.curAnim < this.anims.length - 1) {
-            this.curTime = 0;
-            this.curAnim++;
-        }
-    } else {
-        anim.updateFn(anim.duration && this.curTime/anim.duration, 
-            anim.startParam, updateParam);
-    }
-};
-
 
 var Memylon = function() {
     var FRAME_TIME = 50, FLASH_TIME = 1000;
@@ -215,7 +158,7 @@ var Memylon = function() {
                 xFrom: -100, xTo: xCenter, yFrom: 210, 
                 sizeFrom: 0, sizeTo: 55
             }]),
-            createAnim(['exec', 6500, function () {
+            createAnim(['exec', 10000, function () {
                 var winnerURL = Utils.$('winnerURL');
                 winnerURL.style.visibility = 'visible';
                 winnerURL.href = getCardInfo(cardID).url;
@@ -337,8 +280,61 @@ var Memylon = function() {
     }
 }();
 
-
-
-window.onload = function () {
-    Memylon.init();
+var Utils = {
+    //  Randomly shuffles the array using Fisher-Yates algorithm
+    shuffleArray : function (arr) {
+        for (var i in arr) {
+            var k = Math.floor(Math.random()*i);
+            var val = arr[k];
+            arr[k] = arr[i];
+            arr[i] = val;
+        }
+    },
+    //  Returns true if all elements of the array satisfy the given predicate
+    every : function (arr, predicate) {
+        for (var i in arr) {
+            if (!predicate(arr[i])) return false;
+        }
+        return true;
+    },
+    //  Linear interpolation between a and b with factor t
+    lerp : function (a, b, t) {
+        return a + t*(b - a);
+    },
+    //  Append parameters in "params" with default values from "defaults"
+    setDefaults : function (params, defaults) {
+        for (var i in defaults) {
+            if (params[i] == undefined) {
+                params[i] = defaults[i];
+            }
+        }
+    },
+    $ : function (id) {
+        return document.getElementById(id);
+    }
 }
+
+// a simple class representing a list of animations played in sequence
+AnimSequence = function () {
+    this.anims = [];
+    this.curAnim = 0;
+    this.curTime = 0;
+};
+AnimSequence.prototype.add = function (updateFn, duration, startParam) {
+    this.anims.push({updateFn: updateFn, duration: duration, startParam: startParam});
+};
+AnimSequence.prototype.update = function (dt, updateParam) {
+    var anim = this.anims[this.curAnim];
+    this.curTime += dt;
+    if (anim.duration && this.curTime >= anim.duration) {
+        anim.updateFn(1, anim.startParam, updateParam);
+        if (this.curAnim < this.anims.length - 1) {
+            this.curTime = 0;
+            this.curAnim++;
+        }
+    } else {
+        anim.updateFn(anim.duration && this.curTime/anim.duration, 
+            anim.startParam, updateParam);
+    }
+};
+
