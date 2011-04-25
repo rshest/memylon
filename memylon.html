@@ -5,17 +5,73 @@
         <script type="text/javascript" src="memylon.js"></script> 
     </head>
     <body>
-        <div id="container" style="width: 384px; height: 270px; position: absolute;">
+        <div id="container" style="width: 384px; height: 270px; position: absolute; font-size: 13px">
             <canvas id="gameArea" width="384" height="270">
                 <p>No canvas for you, sorry. Please use a <a href="http://www.google.com/chrome">proper browser</a>.</p>
             </canvas>
             <div id="controls" style="bottom: 0; left: 0; position: absolute; width: 100%; font-weight: bold">
-                <span style="position: relative; left: 5px; color: #FFDFDF;">Misses:</span> 
-                <span style="position: relative; left: 8px; color: #FFFFFF;" id="attemptsCounter">0</span>
-                <input style="position: absolute; right: 2px; bottom: 2px;" id="restartGame" type="button" value="Start Game">
-            </div>
+            <span style="position: relative; left: 5px; color: #FFDFDF;">Misses:</span> 
+            <span style="position: relative; left: 8px; color: #FFFFFF;" id="attemptsCounter">0</span>
+            <a style="position: relative; left: 25px; visibility: hidden;" id="winnerURL" href="http://www.google.com">Sure, but what is this?..</a>
+            <input style="position: absolute; right: 2px; bottom: 2px;" id="restartGame" type="button" value="Start Game">
         </div>
         <img id="cards" src="cards.png" style="visibility: hidden;">
         <img id="bg" src="babel_tower.png" style="visibility: hidden;">
+        <div id="links" style="visibility: visible; ">
+            <a href="http://en.wikipedia.org/wiki/Lua_(programming_language)">Lua</a>
+            <a href="http://en.wikipedia.org/wiki/Erlang_(programming_language)">Erlang</a>
+            <a href="http://en.wikipedia.org/wiki/Clojure">Clojure</a>
+            <a href="http://factorcode.org/">Factor</a>
+            <a href="http://en.wikipedia.org/wiki/D_(programming_language)/">D</a>
+            <a href="http://en.wikipedia.org/wiki/Scratch_(programming_language)">Scratch</a>
+            <a href="http://en.wikipedia.org/wiki/Self_(programming_language)">Self</a>
+            <a href="http://en.wikipedia.org/wiki/Powershell">PowerShell</a>
+            <a href="http://en.wikipedia.org/wiki/Go_(programming_language)">Go</a>
+            <a href="http://en.wikipedia.org/wiki/Python_(programming_language)">Python</a>
+            <a href="http://en.wikipedia.org/wiki/Haskell_(programming_language)">Haskell</a>
+            <a href="http://en.wikipedia.org/wiki/Java_(programming_language)">Java</a>
+            <a href="http://en.wikipedia.org/wiki/Ruby_(programming_language)">Ruby</a>
+            <a href="http://en.wikipedia.org/wiki/Scala_(programming_language)">Scala</a>
+            <a href="http://en.wikipedia.org/wiki/Ada_(programming_language)">Ada</a>
+            <a href="http://en.wikipedia.org/wiki/Smalltalk">Smalltalk</a>
+            <a href="http://reference.wolfram.com/legacy/v5/Tour/MathematicaAsAProgrammingLanguage.html">Mathematica</a>
+            <a href="http://ioke.org/">Ioke</a>
+            <a href="http://en.wikipedia.org/wiki/Squirrel_(programming_language)">Squirrel</a>
+            <a href="http://www.ps.uni-saarland.de/alice/">AliceML</a>
+            <a href="http://en.wikipedia.org/wiki/Logo_(programming_language)">Logo</a>
+            <a href="http://en.wikipedia.org/wiki/Perl_6">Perl6</a>
+            <a href="http://en.wikipedia.org/wiki/Tcl">Tcl</a>
+            <a href="http://en.wikipedia.org/wiki/Rebol">REBOL</a>
+            <a href="http://yosefk.com/c++fqa/">C++</a>
+            <a href="http://en.wikipedia.org/wiki/Eiffel_(programming_language)">Eiffel</a>
+            <a href="http://en.wikipedia.org/wiki/Groovy_(programming_language)">Groovy</a>
+            <a href="http://en.wikipedia.org/wiki/Io_(programming_language)">Io</a>
+            <a href="http://en.wikipedia.org/wiki/Mercury_(programming_language)">Mercury</a>
+            <a href="http://en.wikipedia.org/wiki/Visual_Basic_for_Applications">VBA</a>
+            <a href="http://en.wikipedia.org/wiki/Nemerle">Nemerle</a>
+            <a href="http://en.wikipedia.org/wiki/Prolog">Prolog</a>
+            <a href="http://en.wikipedia.org/wiki/Php">PHP</a>
+            <a href="http://en.wikipedia.org/wiki/Oz_(programming_language)">Oz</a>
+            <a href="http://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a>
+            <a href="http://en.wikipedia.org/wiki/J_(programming_language)">J</a>
+            <a href="http://en.wikipedia.org/wiki/Boo_(programming_language)">Boo</a>
+            <a href="http://en.wikipedia.org/wiki/Object_Pascal">Delphi</a>
+            <a href="http://en.wikipedia.org/wiki/Pure_(programming_language)">Pure</a>
+            <a href="http://en.wikipedia.org/wiki/Qi_(programming_language)">Qi</a>
+            <a href="http://coq.inria.fr/a-short-introduction-to-coq">Coq</a>
+            <a href="http://en.wikipedia.org/wiki/Ecmascript">ECMAScript</a>
+            <a href="http://en.wikipedia.org/wiki/Icon_(programming_language)">Icon</a>
+            <a href="http://en.wikipedia.org/wiki/Fortran">Fortran</a>
+            <a href="http://en.wikipedia.org/wiki/Curl_(programming_language)">Curl</a>
+            <a href="http://en.wikipedia.org/wiki/Clean_(programming_language)">Clean</a>
+            <a href="http://en.wikipedia.org/wiki/Curry_(programming_language)">Curry</a>
+            <a href="http://en.wikipedia.org/wiki/LaTeX">LaTeX</a>
+            <a href="http://en.wikipedia.org/wiki/C_(programming_language)">C</a>
+            <a href="http://en.wikipedia.org/wiki/Miranda_(programming_language)">Miranda</a>
+            <a href="http://en.wikipedia.org/wiki/R_(programming_language)">R</a>
+            <a href="http://en.wikipedia.org/wiki/Squeak">Squeak</a>
+            <a href="http://en.wikipedia.org/wiki/Ocaml">OCaml</a>
+            <a href="http://en.wikipedia.org/wiki/Javascript">JavaScript</a>
+        </div>
     </body>
 </html>

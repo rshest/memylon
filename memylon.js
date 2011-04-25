@@ -63,13 +63,6 @@ var Memylon = function() {
     var FRAME_TIME = 50, FLASH_TIME = 1000;
     var CARD_W = 64, CARD_H = 60, CARDS_IN_ROW = 11, CARDS_NUM_VARIATIONS = 54;
     var FLIP_TIME = 500, HIDE_TIME = 500, SHOW_TIME = 300;
-    var CARD_NAMES = ['Lua', 'Erlang', 'Clojure', 'Factor', 'D', 'Scratch', 'Self',
-        'PowerShell', 'Go', 'Python', 'Haskell', 'Java', 'Ruby', 'Scala', 'Ada', 
-        'Smalltalk', 'Mathematica', 'Ioke', 'Squirrel', 'AliceML', 'Logo', 
-        'Perl6', 'Tcl', 'REBOL', 'C++', 'Eiffel', 'Groovy', 'Io', 'Mercury', 'VBA', 
-        'Nemerle','Prolog','PHP', 'Oz', 'Lisp', 'J',     'Boo', 'Delphi', 'Pure', 
-        'Qi', 'Coq', 'ECMAScript', "Icon", 'Fortran', 'Curl', 'Clean', 'Curry', 
-        'LaTEX', 'C', 'Miranda', 'R', 'Squeak', 'CaML', 'JavaScript'];
     var cards  = [], anims = [];
     var numCardsW = 6, numCardsH = 4;
     var prevIdx = -1;
@@ -217,11 +210,17 @@ var Memylon = function() {
                 sizeFrom: 30
             }]),
             createAnim(['wait', 6500], ['text', 5000, {
-                text: CARD_NAMES[Math.abs(cardID) - 1], 
+                text: getCardInfo(cardID).name,
                 color: '#D91122', 
                 xFrom: -100, xTo: xCenter, yFrom: 210, 
                 sizeFrom: 0, sizeTo: 55
-            }])];
+            }]),
+            createAnim(['exec', 6500, function () {
+                var winnerURL = Utils.$('winnerURL');
+                winnerURL.style.visibility = 'visible';
+                winnerURL.href = getCardInfo(cardID).url;
+            }])
+        ];
     }
     //  process the "card clicked" event
     function clickCard(cardIdx) {
@@ -244,7 +243,7 @@ var Memylon = function() {
                                ['hide', HIDE_TIME, -card.id]);
                 //  animation of the flying card caption
                 anims = [createAnim(['text', 2000, {
-                    text: CARD_NAMES[Math.abs(card.id) - 1], 
+                    text: getCardInfo(card.id).name, 
                     alphaFrom: 1, alphaTo: 0.01, 
                     sizeFrom: 10, sizeTo: 300}], ['wait'])];
                 var cardID = card.id;
@@ -300,6 +299,7 @@ var Memylon = function() {
         prevIdx = -1;
 
         playFlashCards();
+        Utils.$('winnerURL').style.visibility = 'hidden';
     }
     //  update/draw the game board
     function updateBoard () {
@@ -325,6 +325,11 @@ var Memylon = function() {
         if (canInteract && card && (cardIdx !== prevIdx) && (card.id !== 0)) {
             clickCard(cardIdx);
         }
+    }
+    function getCardInfo(cardID) {
+        var cardIdx = Math.abs(cardID) - 1;
+        var a = Utils.$('links').children[cardIdx];
+        return {name:a.innerHTML, url:a.href}; 
     }
 
     return {
