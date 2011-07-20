@@ -12,13 +12,13 @@
             <div id="controls" style="bottom: 0; left: 0; position: absolute; width: 100%; font-weight: bold">
                 <span style="position: relative; left: 5px; color: #FFDFDF;">Misses:</span> 
                 <span style="position: relative; left: 8px; color: #FFFFFF;" id="attemptsCounter">0</span>
-                <a style="position: relative; left: 30px; visibility: hidden; color: #FF8F8F;" id="winnerURL" href="http://www.google.com">Sure, but what is this?..</a>
+                <a style="position: relative; left: 30px; visibility: hidden; color: #FF8F8F;" id="winnerURL" href="http://www.google.com" target="_blank">Sure, but what is this?..</a>
                 <input style="position: absolute; right: 2px; bottom: 2px;" id="restartGame" type="button" value="Start Game">
             </div>
         </div>
-        <img id="cards" src="cards.png" style="visibility: hidden;">
-        <img id="bg" src="babel_tower.png" style="visibility: hidden;">
-        <div id="links" style="visibility: hidden; ">
+        <img id="cards" src="cards.png" style="display: none;">
+        <img id="bg" src="babel_tower.png" style="display: none;">
+        <div id="links" style="display: none; ">
             <a href="http://en.wikipedia.org/wiki/Lua_(programming_language)">Lua</a>
             <a href="http://en.wikipedia.org/wiki/Erlang_(programming_language)">Erlang</a>
             <a href="http://en.wikipedia.org/wiki/Clojure">Clojure</a>
@@ -29,6 +29,8 @@
             <a href="http://en.wikipedia.org/wiki/Powershell">PowerShell</a>
             <a href="http://en.wikipedia.org/wiki/Go_(programming_language)">Go</a>
             <a href="http://en.wikipedia.org/wiki/Python_(programming_language)">Python</a>
+            <a href="http://inform7.com/">Inform7</a>
+
             <a href="http://en.wikipedia.org/wiki/Haskell_(programming_language)">Haskell</a>
             <a href="http://en.wikipedia.org/wiki/Java_(programming_language)">Java</a>
             <a href="http://en.wikipedia.org/wiki/Ruby_(programming_language)">Ruby</a>
@@ -40,6 +42,8 @@
             <a href="http://en.wikipedia.org/wiki/Squirrel_(programming_language)">Squirrel</a>
             <a href="http://www.ps.uni-saarland.de/alice/">AliceML</a>
             <a href="http://en.wikipedia.org/wiki/Logo_(programming_language)">Logo</a>
+            <a href="http://en.wikipedia.org/wiki/OpenCL">OpenCL</a>
+
             <a href="http://en.wikipedia.org/wiki/Perl_6">Perl6</a>
             <a href="http://en.wikipedia.org/wiki/Tcl">Tcl</a>
             <a href="http://en.wikipedia.org/wiki/Rebol">REBOL</a>
@@ -51,6 +55,8 @@
             <a href="http://en.wikipedia.org/wiki/Visual_Basic_for_Applications">VBA</a>
             <a href="http://en.wikipedia.org/wiki/Nemerle">Nemerle</a>
             <a href="http://en.wikipedia.org/wiki/Prolog">Prolog</a>
+            <a href="http://en.wikipedia.org/wiki/F_Sharp_%28programming_language%29">F#</a>
+
             <a href="http://en.wikipedia.org/wiki/Php">PHP</a>
             <a href="http://en.wikipedia.org/wiki/Oz_(programming_language)">Oz</a>
             <a href="http://en.wikipedia.org/wiki/Lisp_(programming_language)">Lisp</a>
@@ -62,6 +68,8 @@
             <a href="http://coq.inria.fr/a-short-introduction-to-coq">Coq</a>
             <a href="http://en.wikipedia.org/wiki/Ecmascript">ECMAScript</a>
             <a href="http://en.wikipedia.org/wiki/Icon_(programming_language)">Icon</a>
+            <a href="http://en.wikipedia.org/wiki/Matlab">MATLAB</a>
+
             <a href="http://en.wikipedia.org/wiki/Fortran">Fortran</a>
             <a href="http://en.wikipedia.org/wiki/Curl_(programming_language)">Curl</a>
             <a href="http://en.wikipedia.org/wiki/Clean_(programming_language)">Clean</a>
@@ -73,6 +81,40 @@
             <a href="http://en.wikipedia.org/wiki/Squeak">Squeak</a>
             <a href="http://en.wikipedia.org/wiki/Ocaml">OCaml</a>
             <a href="http://en.wikipedia.org/wiki/Javascript">JavaScript</a>
+            <a href="http://www.cis.upenn.edu/~bcpierce/papers/pict/Html/Pict.html">Pict</a>
+
+            <a href="http://en.wikipedia.org/wiki/Subtext_%28programming_language%29">Subtext</a>
+            <a href="http://research.microsoft.com/en-us/projects/kodu/">Kodu</a>
+            <a href="http://en.wikipedia.org/wiki/Labview">LabVIEW</a>
+            <a href="http://en.wikipedia.org/wiki/Vvvv">vvvv</a>
+            <a href="http://en.wikipedia.org/wiki/Lava_(programming_language)">Lava</a>
+            <a href="http://en.wikipedia.org/wiki/Dylan_(programming_language)">Dylan</a>
+            <a href="http://www.cs.put.poznan.pl/pawelw/npict/">Nomadic Pict</a>
+            <a href="http://www.colorforth.com/">colorForth</a>
+            <a href="http://en.wikipedia.org/wiki/Snobol">SNOBOL</a>
+            <a href="http://en.wikipedia.org/wiki/Falcon_(programming_language)">Falcon</a>
+            <a href="http://en.wikipedia.org/wiki/PostScript">Postscript</a>
+            <a href="http://en.wikipedia.org/wiki/SISAL">SISAL</a>
+
+            <a href="http://www.contextfreeart.org/">CFDG</a>
+            <a href="http://en.wikipedia.org/wiki/Arc_(programming_language)">Arc</a>
+            <a href="http://www.cat-language.com/">Cat</a>
+            <a href="http://www.generalcoffee.com/index_noflash.php">Hugo</a>
+            <a href="http://en.wikipedia.org/wiki/Javafx">JavaFX</a>
+            <a href="http://en.wikipedia.org/wiki/ELAN_(programming_language)">Elan</a>
+            <a href="http://en.wikipedia.org/wiki/Gosu_(programming_language)">Gosu</a>
+            <a href="http://en.wikipedia.org/wiki/Sed_(programming_language)">sed</a>
+            <a href="http://en.wikipedia.org/wiki/AppleScript">AppleScript</a>
+            <a href="http://en.wikipedia.org/wiki/Bash_(Unix_shell)">Bash</a>
+            <a href="http://dtai.cs.kuleuven.be/projects/ALP/newsletter/nov06/content/Systems/content.html">Ciao</a>
+            <a href="http://en.wikipedia.org/wiki/Objective-C">Objective-C</a>
+
+            <a href="http://en.wikipedia.org/wiki/JavaFX_Script">JavaFX</a>
+            <a href="http://udn.epicgames.com/Three/UnrealScriptReference.html">UnrealScript</a>
+            <a href="http://newspeaklanguage.org/">Newspeak</a>
+            <a href="http://en.wikipedia.org/wiki/REXX">Rexx</a>
+            <a href="http://opalang.org">Opa</a>
+            <a href="http://confluence.jetbrains.net/display/Kotlin/Welcome">Kotlin</a>
         </div>
     </body>
 </html>

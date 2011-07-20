@@ -1,11 +1,18 @@
+//  the main entry point
 window.onload = function () {
     Memylon.init();
 }
 
+//  the game module
 var Memylon = function() {
+    //  constants
     var FRAME_TIME = 50, FLASH_TIME = 1000;
-    var CARD_W = 64, CARD_H = 60, CARDS_IN_ROW = 11, CARDS_NUM_VARIATIONS = 54;
+    var CARDS_IN_ROW = 12, CARDS_IN_COL = 8;
     var FLIP_TIME = 500, HIDE_TIME = 500, SHOW_TIME = 300;
+
+    //  soft constants
+    var CARDS_NUM_VARIATIONS, CARD_W, CARD_H;
+    //  variables
     var cards  = [], anims = [];
     var numCardsW = 6, numCardsH = 4;
     var prevIdx = -1;
@@ -24,13 +31,34 @@ var Memylon = function() {
                 resetGame();
             };
             canvas.addEventListener('mousedown', function (e) {
-                    onMouseClick(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
-                }, false);
+                var parentX = parentY = 0, obj = canvas;
+                while (obj) {
+                    parentX += obj.offsetLeft;
+                    parentY += obj.offsetTop;
+                    obj = obj.offsetParent;
+                } 
+                if (window.scrollLeft != undefined) {
+                    parentX += window.scrollLeft; 
+                    parentY += window.scrollTop;
+                } else if (window.scrollX != undefined) {
+                    parentX -= window.scrollX; 
+                    parentY -= window.scrollY;
+                } else if (document != undefined && document.documentElement != undefined) {
+                    parentX -= document.documentElement.scrollLeft; 
+                    parentY -= document.documentElement.scrollTop;
+                }
+                onMouseClick(e.clientX - parentX, e.clientY - parentY);
+            }, false);
+
             setInterval(updateBoard, FRAME_TIME);
         }
 
         bgImage = Utils.$("bg");
         cardsImage = Utils.$("cards");
+
+        CARDS_NUM_VARIATIONS = Utils.$('links').children.length;
+        CARD_W = cardsImage.width/CARDS_IN_ROW;
+        CARD_H = cardsImage.height/CARDS_IN_COL;
     }
     //  draw a card sprite on canvas
     function drawCard(cardID, x, y, scaleX, scaleY) {
@@ -191,7 +219,8 @@ var Memylon = function() {
                     sizeFrom: 10, sizeTo: 300}], ['wait'])];
                 var cardID = card.id;
                 prevCard.id = card.id = 0;
-                if (Utils.every(cards, function (card) { return (card.id === 0); })) {
+                var cardIsFound = function (card) { return (card.id === 0); };
+                if (Utils.every(cards, cardIsFound)) {
                     //  all matches are found, show the final scene animation
                     playFinalScene(cardID);
                 }
@@ -280,8 +309,9 @@ var Memylon = function() {
     }
 }();
 
+//  helper utility functions
 var Utils = {
-    //  Randomly shuffles the array using Fisher-Yates algorithm
+    //  randomly shuffles the array using Fisher-Yates algorithm
     shuffleArray : function (arr) {
         for (var i in arr) {
             var k = Math.floor(Math.random()*i);
@@ -290,18 +320,18 @@ var Utils = {
             arr[i] = val;
         }
     },
-    //  Returns true if all elements of the array satisfy the given predicate
+    //  returns true if all elements of the array satisfy the given predicate
     every : function (arr, predicate) {
         for (var i in arr) {
             if (!predicate(arr[i])) return false;
         }
         return true;
     },
-    //  Linear interpolation between a and b with factor t
+    //  linear interpolation between a and b with factor t
     lerp : function (a, b, t) {
         return a + t*(b - a);
     },
-    //  Append parameters in "params" with default values from "defaults"
+    //  append parameters in "params" with default values from "defaults"
     setDefaults : function (params, defaults) {
         for (var i in defaults) {
             if (params[i] == undefined) {
@@ -309,6 +339,7 @@ var Utils = {
             }
         }
     },
+    //  poor man's jQuery
     $ : function (id) {
         return document.getElementById(id);
     }
